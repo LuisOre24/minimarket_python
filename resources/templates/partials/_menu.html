@@ -1,0 +1,24 @@
+<div id="sidebar" class='active'>
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <img src="assets/images/logo.svg" alt="" srcset="">
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+
+                <li class='sidebar-title'>Menu</li>
+                {% for value in g.menu %}
+                <li class="sidebar-item 
+                {{ 'active' if request.url_rule.endpoint == value.url else '' }}
+                ">
+                    <a href="{{ url_for(value.url) }}" class='sidebar-link'>
+                        <i data-feather="home" width="20"></i>
+                        <span>{{value.menu}}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>

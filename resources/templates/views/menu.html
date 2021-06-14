@@ -1,0 +1,9 @@
+{% block content %}
+    <span>
+
+        {% for value in g.menu %}
+            {{value.id }} | {{value.menu}} | {{value.url}} | {{value.status}}
+        {% endfor %}
+
+    </span>
+{% endblock %}
