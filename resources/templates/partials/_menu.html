@@ -1,7 +1,7 @@
 <div id="sidebar" class='active'>
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
-            <img src="assets/images/logo.svg" alt="" srcset="">
+            <img src=" {{ url_for('static', filename='images/logo.svg') }}" alt="" srcset="">
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
@@ -11,8 +11,8 @@
                 <li class="sidebar-item 
                 {{ 'active' if request.url_rule.endpoint == value.url else '' }}
                 ">
-                    <a href="{{ url_for(value.url) }}" class='sidebar-link'>
-                        <i data-feather="home" width="20"></i>
+                    <a href="{{url_for(value.url)}}" class='sidebar-link'>
+                        <i data-feather="{{value.icon}}" width="20"></i>
                         <span>{{value.menu}}</span>
                     </a>
                 </li>
