@@ -14,10 +14,14 @@ def categories():
 
 @app.route('/categories/create', methods=['GET', 'POST'])
 def categories_create():
+    print('categories')
     form = CategoriesForm()
     if form.validate_on_submit():
         controller = CategoriesController()
+        print("if route categories")
         return controller.create(form)
+    else:
+        print("error")
     return render_template('views/categories/forms/create.html', title='Categorias - Crear', form=form)
 
 
@@ -28,6 +32,8 @@ def categories_update(id):
     if form.validate_on_submit():
         controller = CategoriesController()
         return controller.update(form, id)
+    else:
+        print("error")
     return render_template('views/categories/forms/update.html', 
                         title='Categorias - Actualizar', form=form, category_id=category.id)
 

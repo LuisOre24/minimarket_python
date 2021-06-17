@@ -11,13 +11,11 @@ class CategoriesController:
 
     def create(self, form):
         try:
-            name_category = form.name.data
+            name_category = form.category.data
             category = CategoriesModel(category=name_category, status=1)
-            print(category)
             db.session.add(category)
             db.session.commit()
             flash(f'Se genero nueva categoria: {name_category}', category='success')
-            print('Creado')
             return redirect(url_for('categories'))
         except Exception as ex:
             print(str(ex))
