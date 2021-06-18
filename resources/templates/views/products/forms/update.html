@@ -20,9 +20,22 @@
                     {{ form.csrf_token }}
                     <div class="row">
                         <div class="col-12">
-                            {{ render_field(form.category, 
-                                class_="form-control", icon=False, placeholder='Nombre de Categoria') }}
+                            {{ render_field(form.product,
+                                class_="form-control", icon=False, placeholder='Nombre del Producto') }}
                         </div>
+                        <div class="col-12">
+                            {{ render_field(form.category_id,
+                                class_="form-control", icon=False, placeholder='Categoria') }}
+                        </div>
+                        <div class="col-12">
+                            {{ render_field(form.price,
+                                class_="form-control", icon=False, placeholder='Precio del Producto') }}
+                        </div>
+                        <div class="col-12">
+                            {{ render_field(form.stock,
+                                class_="form-control", icon=False, placeholder='Stock del Producto') }}
+                        </div>
+    
                         <div class="col-12 d-flex justify-content-end">
                             {{ button_field(form.submit, class_="btn btn-primary me-1 mb-1") }}
                         </div>

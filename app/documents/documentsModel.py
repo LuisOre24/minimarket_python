@@ -6,5 +6,7 @@ class DocumentsModel(db.Model):
     document = db.Column(db.String(50))
     status = db.Column(db.Integer)
 
+    sale = db.relationship('SalesModel', back_populates='document')
+
     def __repr__(self):
         return f'Document: {self.document}'

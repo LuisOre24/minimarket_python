@@ -22,12 +22,12 @@ class ProductsController:
                                     status=1)
             db.session.add(product)
             db.session.commit()
-            flash(f'Se genero un nuevo producto: {name_product}', product='success')
+            flash(f'Se genero un nuevo producto: {name_product}', category='success')
             return redirect(url_for('products'))
         except Exception as ex:
             print(str(ex))
             db.session.rollback()
-            flash(f'Ocurrio un error -> {str(ex)}', product='danger')
+            flash(f'Ocurrio un error -> {str(ex)}', category='danger')
             return redirect(url_for('products_create'))
 
     def update(self, form, product_id):
@@ -42,11 +42,11 @@ class ProductsController:
             product.price = price_product
             product.stock = stock_product
             db.session.commit()
-            flash(f'Se actualizo correctamente el producto', product='success')
+            flash(f'Se actualizo correctamente el producto', category='success')
             return redirect(url_for('products'))
         except Exception as ex:
             db.session.rollback()
-            flash(f'Error al actualizar el producto , error -> {str(ex)}', product='danger')
+            flash(f'Error al actualizar el producto , error -> {str(ex)}', category='danger')
             return redirect(url_for('products_update', id=product_id))
 
     def delete(self, product_id):
@@ -55,8 +55,8 @@ class ProductsController:
             status = 0 if product.status == 1 else 1
             product.status = status
             db.session.commit()
-            flash(f'Se deshabilito con exito el product', product='succes')
+            flash(f'Se deshabilito con exito el producto', category='success')
             return redirect(url_for('products'))
         except Exception as ex:
             db.session.rollback() 
-            flash(f'Error ocurrido. Error -> {str(ex)}', product='danger')
+            flash(f'Error ocurrido. Error -> {str(ex)}', category='danger')

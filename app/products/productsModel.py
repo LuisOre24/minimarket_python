@@ -12,6 +12,7 @@ class ProductsModel(db.Model):
 
     category = db.relationship('CategoriesModel', back_populates='products')
     storer = db.relationship('UsersModel', back_populates='product')
+    sales = db.relationship('SalesModel', back_populates='product')
 
     def __repr__(self):
         return f'Producto: {self.product}'

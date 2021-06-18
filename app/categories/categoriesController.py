@@ -47,3 +47,8 @@ class CategoriesController:
         except Exception as ex:
             db.session.rollback() 
             flash(f'Error ocurrido. Error -> {str(ex)}', category='danger')
+
+    @staticmethod
+    def get_all():
+        return CategoriesModel.query.filter_by(status=1).order_by(CategoriesModel.category).all()
+        
