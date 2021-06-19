@@ -30,15 +30,16 @@ class SalesController:
                             client = name_client,
                             status = 1)
             print(name_product, quantity_product,"register")
-            product = ProductsModel.query.filter_by(id = name_product).first()
-            product.stock = product.stock - quantity_product
-            #ProductsController.update_stock_sold(name_product, quantity_product)
+            #product = ProductsModel.query.filter_by(id = name_product).first()
+            #product.stock = product.stock - quantity_product
+            ProductsController.update_stock_sold(name_product, quantity_product)
             db.session.add(sale)
             db.session.commit()
             flash('se registro correctamante la venta', category='success')
             return redirect(url_for('sales'))
         except Exception as ex:
             db.session.rollback()
+            print(ex)
             flash('Ocurrio un error al registrar venta', category='danger')
             return redirect(url_for('sell'))
         
