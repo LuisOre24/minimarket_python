@@ -49,6 +49,8 @@ class ProductsController:
             flash(f'Error al actualizar el producto , error -> {str(ex)}', category='danger')
             return redirect(url_for('products_update', id=product_id))
 
+    ##############################      METODOS A REVISAR     ###################################
+
     def update_stock_sold(self, product_id, quatity_sold):
         try:
             product = ProductsModel.query.filter_by(id=product_id).first()
@@ -57,6 +59,17 @@ class ProductsController:
         except Exception as ex:
             db.session.rollback()
             print(ex)
+
+    def update_stock_cancel(self, product_id, quatity_sold):
+        try:
+            product = ProductsModel.query.filter_by(id=product_id).first()
+            product.stock = product.stock + quatity_sold
+            db.session.commit()
+        except Exception as ex:
+            db.session.rollback()
+            print(ex)
+
+    ################################################################################
 
 
     def delete(self, product_id):
