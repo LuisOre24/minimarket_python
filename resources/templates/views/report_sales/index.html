@@ -1,0 +1,67 @@
+{% extends 'layouts/main.html' %}
+{% from 'utils/_status.html' import status_label %}
+{% from 'utils/_pagination.html' import pagination %}
+{% from 'utils/_messages.html' import flash_messages %}
+
+{% block content %}
+
+<div class="row" id="table-bordered">
+  {{ flash_messages(messages) }}
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Reporte de Ventas</h4>
+      </div>
+
+      <div class="card-content">
+        <!-- <div class="card-body">
+          <p class="card-text">Add <code>.table-bordered</code> for borders on all sides of the table and cells.
+            For
+            Inverse Dark Table, add <code>.table-dark</code> along with <code>.table-bordered</code>.</p>
+        </div> -->
+        <!-- table bordered -->
+        <div class="table-responsive">
+          <table class="table table-bordered mb-0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Fecha Venta</th>
+                <th>Estado</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for sale in data.items %}
+                <tr>
+                  <td class="text-bold-500">{{ loop.index + (data.page - 1) * data.per_page }}</td>
+                  <td class="text-bold-500">{{ sale.client }}</td>
+                  <td class="text-bold-500">{{ sale.product.product }}</td>
+                  <td class="text-bold-500">{{ sale.cantidad }}</td>
+                  <td class="text-bold-500">{{ sale.total_total }}</td>
+                  <td class="text-bold-500">{{ sale.fecha_venta }}</td>
+                  <td>{{ status_label(sale.status) }}</td>
+                  <td>
+                    <div class="buttons" role="group">
+                      <a href="{{url_for('sales_delete', id=sale.id)}}" class="btn btn-warning round">Anular</a>
+                    </div>
+                  </td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td class="text-center" colspan=8>
+                    No hay registro de ventas
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

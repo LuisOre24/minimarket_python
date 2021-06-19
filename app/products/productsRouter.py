@@ -6,10 +6,12 @@ from flask_login import login_required
 from app.products.productsController import ProductsController
 from app.products.productsForm import ProductsForm
 from app.products.productsModel import ProductsModel
+from app.middleware import storer
 
 
 @app.route('/products')
 @login_required
+@storer
 def products():
     page = request.args.get('page', type=int, default=1)
     controller = ProductsController()
@@ -18,6 +20,7 @@ def products():
 
 @app.route('/products/create', methods=['GET', 'POST'])
 @login_required
+@storer
 def products_create():
     form = ProductsForm()
     categories = CategoriesController.get_all()
@@ -30,6 +33,7 @@ def products_create():
 
 @app.route('/products/update/<int:id>', methods=['GET', 'POST'])
 @login_required
+@storer
 def products_update(id):
     product = ProductsModel.query.get_or_404(id)
     form = ProductsForm(obj=product)
@@ -45,6 +49,7 @@ def products_update(id):
 
 @app.route('/products/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
+@storer
 def products_delete(id):
     controller = ProductsController()
     return controller.delete(id)

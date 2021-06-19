@@ -1,0 +1,58 @@
+{% extends 'layouts/main.html' %}
+{% from 'utils/_form_fields.html' import render_field, button_field %}
+{% from 'utils/_messages.html' import flash_messages %}
+
+
+{% block content %}
+<section id="multiple-column-form">
+    <div class="row match-height">
+        <div class="col-12">
+            {{ flash_messages(messages) }}
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Registrar Venta</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <form class="form" method="POST" action="{{ url_for('sell') }}">
+                            {{ form.csrf_token }}
+                            <div class="row">
+                                <div class="col-md-8 col-12">
+                                    {{ render_field(form.client, 
+                                        class_="form-control", icon=False, placeholder='Datos del Cliente') }}
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    {{ render_field(form.document_id,
+                                        class_="form-control", icon=False, placeholder='Documento') }}
+                                </div>
+                                <div class="col-md-8 col-12">
+                                    {{ render_field(form.product_id,
+                                        class_="form-control", icon=False, placeholder='Producto') }}
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    {{ render_field(form.quantity, 
+                                        class_="form-control", icon=False, placeholder='0') }}
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    {{ render_field(form.subtotal, 
+                                        class_="form-control", icon=False, placeholder='0') }}
+                                </div>
+                                <div class="col-md-8 col-12 d-flex justify-content-end">
+                                    <div class="form-group">
+                                        <label >Total</label>
+                                        <input type="number" class="form-control" id="total" name="total" readonly="readonly" value="">
+                                    </div>
+                                </div>
+                                <div class="col-11 d-flex justify-content-end">
+                                    {{ button_field(form.submit, class_="btn btn-primary me-2 mb-2")}}
+                                    {{ button_field(form.reset, class_="btn btn-light-secondary me-2 mb-2")}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

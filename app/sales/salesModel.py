@@ -11,6 +11,8 @@ class SalesModel(db.Model):
     fecha_venta = db.Column(db.DateTime(timezone=True), server_default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     document_id = db.Column(db.Integer, db.ForeignKey('document.id'))
+    client = db.Column(db.String(350))
+    status = db.Column(db.Integer)
 
     product = db.relationship('ProductsModel', back_populates = 'sales')
     seller = db.relationship('UsersModel', back_populates = 'sale')
@@ -18,6 +20,9 @@ class SalesModel(db.Model):
 
     def __repr__(self):
         return f'venta: {self.id}'
+
+
+
 
 
 

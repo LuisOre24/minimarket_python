@@ -43,7 +43,7 @@ class AuthController:
                 return redirect(url_for('register'))
             
             # Creación de un usuario
-            user_add = UsersModel(user=username, password=password, rol_id=1)
+            user_add = UsersModel(user=username, password=password, rol_id=3)
             user_add.hash_password()
             db.session.add(user_add)
             db.session.commit()

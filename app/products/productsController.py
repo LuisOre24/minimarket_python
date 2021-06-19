@@ -49,6 +49,7 @@ class ProductsController:
             flash(f'Error al actualizar el producto , error -> {str(ex)}', category='danger')
             return redirect(url_for('products_update', id=product_id))
 
+
     def delete(self, product_id):
         try:
             product = ProductsModel.query.filter_by(id = product_id).first()
@@ -60,3 +61,7 @@ class ProductsController:
         except Exception as ex:
             db.session.rollback() 
             flash(f'Error ocurrido. Error -> {str(ex)}', category='danger')
+
+    @staticmethod
+    def get_all():
+        return ProductsModel.query.filter_by(status=1).order_by(ProductsModel.product).all()
